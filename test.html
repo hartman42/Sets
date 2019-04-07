@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      window.onload = function() {
+        (function f() {
+          'use strict'
+          var URL = window.URL || window.webkitURL
+
+          var video = document.querySelector('video')
+
+          video.addEventListener('ended', (event) => {
+            console.log('Video stopped either because 1) it was over, ' +
+                'or 2) no further data is available.');
+            loadNext();
+          })
+
+          video.src = 'https://www.dropbox.com/s/36fzdyhkt21klpd/Take%20Five.mov?dl=1'
+
+          function loadNext() {
+            var video = document.querySelector('video')
+            video.src = 'https://www.dropbox.com/s/5o64c3kqnxyhyzx/Taste%20Of%20Honey%2C%20A.mov?dl=1'
+          }
+
+        })()
+      }
+    </script>
+  </head>
+<body>
+    <video width="320" height="240" controls autoplay></video></body>
+</html>
