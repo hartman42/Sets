@@ -4,8 +4,6 @@
     <script>
       window.onload = function() {
         (function f() {
-          'use strict'
-          var URL = window.URL || window.webkitURL
 
           var video = document.querySelector('video')
 
@@ -15,7 +13,6 @@
             loadNext();
           })
 
-          video.src = 'https://www.dropbox.com/s/36fzdyhkt21klpd/Take%20Five.mov?dl=1'
 
           function loadNext() {
             var video = document.querySelector('video')
