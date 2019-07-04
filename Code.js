@@ -9,5 +9,10 @@ function loadNext() {
 }
 
 playPauseButton.addEventListener('click', function(event) {
-  message.textContent("click");
+	event.stopPropagation();
+	if (audio.paused) {
+	  audio.play();
+	} else {
+	  audio.pause();
+	}
 });
