@@ -9,6 +9,7 @@ function loadNext() {
 }
 
 playPauseButton.addEventListener('click', function(event) {
+  message.textContent("click");
   event.stopPropagation();
   if (audio.paused) {
     message.textContent("play");
