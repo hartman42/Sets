@@ -10,9 +10,9 @@ function loadNext() {
 
 playPauseButton.addEventListener('click', function(event) {
   event.stopPropagation();
-  if (video.paused) {
-    video.play();
+  if (audio.paused) {
+    audio.play();
   } else {
-    video.pause();
+    audio.pause();
   }
 });
