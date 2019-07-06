@@ -9,7 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <audio id="audio" controls src="https://www.dropbox.com/s/3jgbon7ppcx0wio/Take%20Five.mp3?raw=1" type="audio/mpeg"></audio>
+
+    <p>Google Sheets API Quickstart</p>
+
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize_button" style="display: none;">Authorize</button>
+    <button id="signout_button" style="display: none;">Sign Out</button>
+
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+
+    <audio id="audio" controls src="" type="audio/mpeg"></audio>
     <script src="./code.js"></script>
-  </body>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+
+</body>
 </html>
