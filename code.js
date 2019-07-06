@@ -4,7 +4,7 @@ audio.addEventListener('ended', (event) => {
 });
 
 function loadNext() {
-  audio.src = './audio/Take Ten.mp3';
+  audio.src = 'https://www.dropbox.com/s/k8ilpk9kthszu4p/Take%20Ten.mp3?raw=1';
   audio.play();
 }
 
