@@ -4,15 +4,7 @@ audio.addEventListener('ended', (event) => {
 });
 
 function loadNext() {
-  audio.src = 'https://www.dropbox.com/s/r3pd176ivl80kvg/Barefoot%20Sunday%20Blues%20-%206%3A30%3A19%2C%204.06%20PM.mp3?dl=1';
+  audio.src = './audio/Take Ten.mp3';
   audio.play();
 }
 
-playPauseButton.addEventListener('click', function(event) {
-	event.stopPropagation();
-	if (audio.paused) {
-	  audio.play();
-	} else {
-	  audio.pause();
-	}
-});
