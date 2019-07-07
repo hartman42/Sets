@@ -32,7 +32,8 @@ function setNextValidRow() {
 }
 
 function loadNext() {
-  audio.src = getAudioFile();
+  audio.src = getFileName('Audio File');
+  leadSheet.data = getFileName('Eb Lead Sheet') + '#view=FitV&toolbar=0&navpanes=0&scrollbar=0';
 }
 
 function loadFirstTune() {
@@ -58,10 +59,11 @@ function loadFirstTune() {
 	//get the next tune
 	setNextValidRow();
 
-	audio.src = getAudioFile();
+	audio.src = getFileName('Audio File');
+	leadSheet.data = getFileName('Eb Lead Sheet') + '#view=FitV&toolbar=0&navpanes=0&scrollbar=0';
 }
 
-function getAudioFile() {
-	var f = range.values[currentRow][range.values[0].indexOf('Audio File')];
+function getFileName(field) {
+	var f = range.values[currentRow][range.values[0].indexOf(field)];
 	return f.replace(/\?dl\=0/g,'?raw=1');
 }

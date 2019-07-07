@@ -81,7 +81,7 @@ function handleSignoutClick(event) {
  */
 
  function showProblem(message) {
-	var pre = document.getElementById('content');
+	var pre = document.getElementById('setList');
 	var textContent = document.createTextNode(message + '\n');
 	pre.appendChild(textContent);
 }
@@ -96,15 +96,15 @@ function getSet() {
 		range: sheetRange,
 	}).then(function(response) {
 		range = response.result;
-		updateTable();
+		updateSetListTable();
 		loadFirstTune();
 	}, function(response) {
 		showProblem('Error: ' + response.result.error.message);
 	});
 }
 
-function updateTable() {
-	var div = document.getElementById('content');
+function updateSetListTable() {
+	var div = document.getElementById('setList');
 	var tbl = '';
 
 	if (range.values.length > 0) {
@@ -157,7 +157,7 @@ function updateLastPlayed() {
 	request.then(function(response) {
         // TODO: Change code below to process the `response` object:
 		// console.log(response.result);
-		updateTable();
+		updateSetListTable();
 	}, function(reason) {
         console.error('error: ' + reason.result.error.message);
 	});

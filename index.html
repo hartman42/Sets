@@ -23,12 +23,19 @@
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
 
-    <div id="content"></div>
+    <div id="setList"></div>
 
-    <audio id="audio" controls src="" type="audio/mpeg"></audio>
-    <script src="./gscode.js"></script>
+	<div id='audioContainer'>
+		<audio id="audio" controls src="" type="audio/mpeg"></audio>
+	</div>
+
+	<div id='leadSheetContainer'>
+		<object id='leadSheet' type="application/pdf" width="300" height="400"></object>
+	</div>
+
+
+	<script src="./gscode.js"></script>
     <script src="./code.js"></script>
-
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
