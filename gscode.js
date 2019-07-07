@@ -140,9 +140,11 @@ function firstTune() {
 				var d = new Date(range.values[i][range.values[0].indexOf('Last Played')]);
 				if (d > mostRecentTime) {
 					currentRow = i;
+					mostRecentTime = d;
 				}
 			} else {
 				mostRecentTime = new Date(range.values[i][range.values[0].indexOf('Last Played')]);
+				currentRow = i;
 			}
 		}
 	}
