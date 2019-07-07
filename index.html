@@ -6,7 +6,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="theme-color" content="#000">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		table {
+			border-collapse: collapse;
+		}
+
+		table, th, td {
+			border: 1px solid black;
+		}
+	</style>
   </head>
   <body>
 
@@ -16,9 +25,10 @@
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
 
-    <pre id="content" style="white-space: pre-wrap;"></pre>
+    <div id="content"></div>
 
     <audio id="audio" controls src="" type="audio/mpeg"></audio>
+    <script src="./gscode.js"></script>
     <script src="./code.js"></script>
 
     <script async defer src="https://apis.google.com/js/api.js"
