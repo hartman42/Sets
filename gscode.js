@@ -88,9 +88,31 @@ function appendPre(message) {
 	var textContent = document.createTextNode(message + '\n');
 	pre.appendChild(textContent);
 }
-function showTable(tbl) {
+function showTable() {
 	var div = document.getElementById('content');
-	div.innerHTML = tbl;
+	var tbl = '';
+
+	if (range.values.length > 0) {
+		tbl = '<table>';
+		var e;
+		for (i = 0; i < range.values.length; i++) {
+			if (range.values[i][range.values[0].indexOf(mustHave)]) {
+				var row = range.values[i];
+				tbl += '<tr>';
+				e = (i==0) ? 'th':'td';
+				for (j = 0; j < row.length; j++) {
+					if (showColumns.indexOf('[' + range.values[0][j] + ']')>=0) {
+						tbl += '<' + e + '>' + row[j] + '</' + e + '>';
+					}
+				}
+				tbl += '</tr>';
+			};
+		}
+		tbl += '</table>';
+		div.innerHTML = tbl;
+	} else {
+		appendPre('No data found.');
+	}
 }
 
 /**
@@ -103,28 +125,8 @@ function showSet() {
 		range: sheetRange,
 	}).then(function(response) {
 		range = response.result;
-		if (range.values.length > 0) {
-			var tbl = '<table>';
-			var e;
-			for (i = 0; i < range.values.length; i++) {
-				if (range.values[i][range.values[0].indexOf(mustHave)]) {
-					var row = range.values[i];
-					tbl += '<tr>';
-					e = (i==0) ? 'th':'td';
-					for (j = 0; j < row.length; j++) {
-						if (showColumns.indexOf('[' + range.values[0][j] + ']')>=0) {
-							tbl += '<' + e + '>' + row[j] + '</' + e + '>';
-						}
-					}
-					tbl += '</tr>';
-				};
-			}
-			tbl += '</table>';
-			showTable(tbl);
-			audio.src = firstTune();
-		} else {
-			appendPre('No data found.');
-		}
+		showTable();
+		audio.src = firstTune();
 	}, function(response) {
 		appendPre('Error: ' + response.result.error.message);
 	});
@@ -173,7 +175,7 @@ function updateLastPlayed() {
 	};
 
 	var d = new Date();
-	var s = (d.getMonth() + 1) + '/' + d.getDay() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + ('0' + d.getMinutes()).trimRight(2);
+	var s = d.toLocaleString();
 
 	range.values[currentRow][range.values[0].indexOf('Last Played')] = s;
 
@@ -186,7 +188,8 @@ function updateLastPlayed() {
 	var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
 	request.then(function(response) {
         // TODO: Change code below to process the `response` object:
-        console.log(response.result);
+		// console.log(response.result);
+		showTable();
 	}, function(reason) {
         console.error('error: ' + reason.result.error.message);
 	});
