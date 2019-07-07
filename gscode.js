@@ -1,9 +1,5 @@
 var sheetID = '113pll6NtAXJAOYY2YKvpglQ4hS_WIiz2q5heSGloipA';
 var sheetRange = 'Songs!A:BB';
-var range;
-var currentRow;
-var mustHave = 'Audio File';
-var showColumns = '[Title][Last Played]';
 
 var CLIENT_ID = '679153078592-q207n5nje739pk4nq81ehd03sabhmct5.apps.googleusercontent.com';
 var API_KEY = 'AIzaSyAGQJwsDjRnp9wmtJWd6onWCOUHx2zejrc';
@@ -44,7 +40,7 @@ function initClient() {
 		authorizeButton.onclick = handleAuthClick;
 		signoutButton.onclick = handleSignoutClick;
 	}, function(error) {
-		appendPre(JSON.stringify(error, null, 2));
+		showProblem(JSON.stringify(error, null, 2));
 	});
 }
 
@@ -56,7 +52,7 @@ function updateSigninStatus(isSignedIn) {
 	if (isSignedIn) {
 		authorizeButton.style.display = 'none';
 		signoutButton.style.display = 'block';
-		showSet();
+		getSet();
 	} else {
 		authorizeButton.style.display = 'block';
 		signoutButton.style.display = 'none';
@@ -83,12 +79,31 @@ function handleSignoutClick(event) {
  *
  * @param {string} message Text to be placed in pre element.
  */
-function appendPre(message) {
+
+ function showProblem(message) {
 	var pre = document.getElementById('content');
 	var textContent = document.createTextNode(message + '\n');
 	pre.appendChild(textContent);
 }
-function showTable() {
+
+/**
+ * Print the names and majors of students in a sample spreadsheet:
+ * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+ */
+function getSet() {
+	gapi.client.sheets.spreadsheets.values.get({
+		spreadsheetId: sheetID,
+		range: sheetRange,
+	}).then(function(response) {
+		range = response.result;
+		updateTable();
+		loadFirstTune();
+	}, function(response) {
+		showProblem('Error: ' + response.result.error.message);
+	});
+}
+
+function updateTable() {
 	var div = document.getElementById('content');
 	var tbl = '';
 
@@ -111,55 +126,8 @@ function showTable() {
 		tbl += '</table>';
 		div.innerHTML = tbl;
 	} else {
-		appendPre('No data found.');
+		showProblem('No data found.');
 	}
-}
-
-/**
- * Print the names and majors of students in a sample spreadsheet:
- * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- */
-function showSet() {
-	gapi.client.sheets.spreadsheets.values.get({
-		spreadsheetId: sheetID,
-		range: sheetRange,
-	}).then(function(response) {
-		range = response.result;
-		showTable();
-		audio.src = firstTune();
-	}, function(response) {
-		appendPre('Error: ' + response.result.error.message);
-	});
-}
-
-function firstTune() {
-	//go through the range and find what the last tune that was played was
-	var mostRecentTime;
-
-	for (var i = 1; i < range.values.length; i++) {
-		if (range.values[i][range.values[0].indexOf('Last Played')]) {
-			if (mostRecentTime) {
-				var d = new Date(range.values[i][range.values[0].indexOf('Last Played')]);
-				if (d > mostRecentTime) {
-					currentRow = i;
-					mostRecentTime = d;
-				}
-			} else {
-				mostRecentTime = new Date(range.values[i][range.values[0].indexOf('Last Played')]);
-				currentRow = i;
-			}
-		}
-	}
-
-	getNextValidRow();
-
-	return getAudioFile();
-
-}
-
-function getAudioFile() {
-	var f = range.values[currentRow][range.values[0].indexOf('Audio File')];
-	return f.replace(/\?dl\=0/g,'?raw=1');
 }
 
 function updateLastPlayed() {
@@ -189,7 +157,7 @@ function updateLastPlayed() {
 	request.then(function(response) {
         // TODO: Change code below to process the `response` object:
 		// console.log(response.result);
-		showTable();
+		updateTable();
 	}, function(reason) {
         console.error('error: ' + reason.result.error.message);
 	});
