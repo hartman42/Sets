@@ -20,22 +20,31 @@
   </head>
   <body>
 
-	<div id='leadSheetContainer'>
-		<object id='leadSheet' type="application/pdf"></object>
-	</div>
+	<table><tbody><tr><td>
 
-	<div id='changesContainer'></div>
+		<div id='changesContainer'></div>
 
-	<div id='audioContainer'>
-		<audio id="audio" controls src="" type="audio/mpeg"></audio>
-	</div>
+		<div id='audioContainer'>
+			<audio id="audio" controls src="" type="audio/mpeg"></audio>
+		</div>
 
-    <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
+		<table><tbody><tr><td>
+			<!--Add buttons to initiate auth sequence and sign out-->
+			<button id="authorize_button" style="display: none;">Authorize</button>
+			<button id="signout_button" style="display: none;">Sign Out</button>
+		</td><td>
+			<div id='repeatsDiv'></div>
+		</td></tr></tbody></table>
 
-    <div id="setList"></div>
+		<div id="setList"></div>
 
+	</td><td>
+
+		<div id='leadSheetContainer' style="float:left;">
+			<object id='leadSheet' type="application/pdf"></object>
+		</div>
+
+	</td></tr></tbody></table>
 
 	<script src="./gscode.js"></script>
     <script src="./code.js"></script>

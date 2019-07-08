@@ -110,14 +110,17 @@ function updateSetListTable() {
 	if (range.values.length > 0) {
 		tbl = '<table>';
 		var e;
+		var b;
 		for (i = 0; i < range.values.length; i++) {
 			if (range.values[i][range.values[0].indexOf(mustHave)]) {
 				var row = range.values[i];
 				tbl += '<tr>';
 				e = (i==0) ? 'th':'td';
-				for (j = 0; j < row.length; j++) {
+				b = (i==0) ? 'GoTo' : '<button onclick="gotoThisSong(this)">' + i + '</button>';
+				tbl += '<' + e + '>' + b + '</' + e + '>';
+				for (j = 0; j < range.values[0].length; j++) {
 					if (showColumns.indexOf('[' + range.values[0][j] + ']')>=0) {
-						tbl += '<' + e + '>' + row[j] + '</' + e + '>';
+						tbl += '<' + e + '>' + ((row[j])?row[j]:'&nbsp') + '</' + e + '>';
 					}
 				}
 				tbl += '</tr>';
