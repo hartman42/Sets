@@ -142,15 +142,23 @@ function updateLastPlayed() {
         valueInputOption: 'RAW'  // TODO: Update placeholder value.
 	};
 
+	var r = new Array(range.values.length);
+
+	for (var i = 0; i < r.length; i++) {
+		r[i] = new Array(range.values[0].length);
+	}
+
 	var d = new Date();
 	var s = d.toLocaleString();
 
 	range.values[currentRow][range.values[0].indexOf('Last Played')] = s;
 
+	r[currentRow][range.values[0].indexOf('Last Played')] = s;
+
 	var valueRangeBody = {
         // TODO: Add desired properties to the request body. All existing properties
 		// will be replaced.
-		values: range.values
+		values: r
 	};
 
 	var request = gapi.client.sheets.spreadsheets.values.update(params, valueRangeBody);
