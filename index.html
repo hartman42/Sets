@@ -13,25 +13,28 @@
 			border-collapse: collapse;
 		}
 
-		table, th, td {
+		#setList table, #setList th, #setList td {
 			border: 1px solid black;
 		}
 	</style>
   </head>
   <body>
-    <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
 
-    <div id="setList"></div>
+	<div id='leadSheetContainer'>
+		<object id='leadSheet' type="application/pdf"></object>
+	</div>
+
+	<div id='changesContainer'></div>
 
 	<div id='audioContainer'>
 		<audio id="audio" controls src="" type="audio/mpeg"></audio>
 	</div>
 
-	<div id='leadSheetContainer'>
-		<object id='leadSheet' type="application/pdf" width="300" height="400"></object>
-	</div>
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize_button" style="display: none;">Authorize</button>
+    <button id="signout_button" style="display: none;">Sign Out</button>
+
+    <div id="setList"></div>
 
 
 	<script src="./gscode.js"></script>
