@@ -2,6 +2,14 @@ var currentRow = 0;
 var showColumns = '[Title][Last Played]';
 var range;
 var mustHave = 'Audio File';
+var meterField = 'Meter';
+var iFldName = 'I Changes';
+var aFldName = 'A Changes';
+var bFldName = 'B Changes';
+var cFldName = 'C Changes';
+var lsWidth = "300";
+var lsHeight = "400";
+
 
 audio.addEventListener('ended', (event) => {
 	//stamp it
@@ -13,6 +21,12 @@ audio.addEventListener('ended', (event) => {
 	//play the thing
 	audio.play();
 });
+
+function gotoThisSong(e) {
+	currentRow = e.innerHTML;
+	loadNext();
+	audio.play();
+}
 
 function setNextValidRow() {
 	while (currentRow < range.values.length) {
